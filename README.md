@@ -4,7 +4,9 @@
 
 ## 使用
 
-手机浏览器打开 GitHub Pages 地址后，可「添加到主屏幕」。
+手机访问：https://subangbang19950406.github.io/train-time/
+
+可「添加到主屏幕」当快捷方式。
 
 本地预览：
 

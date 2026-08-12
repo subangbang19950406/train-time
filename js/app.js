@@ -312,7 +312,8 @@
     refreshMenus();
     bind();
     render();
-    setInterval(render, 30000);
+    // 每秒重算等待分钟数，分钟一到就更新「还有 N 分钟」并剔除已过班次
+    setInterval(render, 1000);
   }
 
   if (document.readyState === "loading") {
