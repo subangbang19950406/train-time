@@ -1,0 +1,40 @@
+schema: spec-driven
+
+# Project context — shown to AI when creating artifacts (proposals / specs / tasks).
+context: |
+  个人通勤小工具：查南京地铁 S3 任意上下车站之间的下一班时刻。
+  工作区从零开始，无后端、无账号体系。
+
+  # 产品范围（当前实现）
+  - 方向：往高家冲 / 往南京南（默认往高家冲）
+  - 上车点 + 下车点：S3 全线 19 站任意合法 OD（默认油坊桥 → 兰花塘）
+  - 日历：工作日 / 非工作日（按星期几默认，可手切「工 / 休」）
+  - 刷新后 localStorage 记住方向、上车点、下车点
+  - 不需要离线、PWA、小程序、实时到站、法定节假日自动日历
+
+  # 数据模型
+  - 真源：兰花塘站官方站牌两个方向逐班时刻（工作日 / 非工作日）
+  - 以兰花塘为锚点：各站相对兰花塘的固定分钟差（offsetFromLanhuatang）
+  - 任意 OD：boardTime = anchor + offset(board)，arriveTime = anchor + offset(alight)
+  - 往高家冲时刻表不含刘村短交路（数据形态保证）
+  - 高峰可能 ±1 分钟；界面上车时刻标「约」
+
+  # UI
+  - 静态单页：方向胶囊 + 一行查询条（上 / 下 / 历）
+  - 站点用自定义下拉（非原生 select 弹层）
+  - 部署：本地 file:// 或静态托管；data 同步到 js/data.js
+
+  # 技术倾向
+  - index.html + css/styles.css + js/{schedule,app,data}.js + data/s3-lanhuatang.json
+  - 现代浏览器；注释与界面文案中文
+
+# Per-artifact rules
+rules:
+  proposal:
+    - 默认包含 Non-goals（非目标）小节
+  specs:
+    - spec 描述稳定行为契约 (what)，不绑定具体框架或文件名 (how)
+    - 时刻推算与 OD 约束必须写成可验收场景
+  tasks:
+    - 每个任务控制在约 2 小时以内
+    - 已交付项在 tasks.md 中标记 [x]
