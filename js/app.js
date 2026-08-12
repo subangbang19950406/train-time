@@ -9,7 +9,7 @@
   };
   var data = window.S3_LANHUATANG;
   var S = window.S3Schedule;
-  var COLLAPSED_LIMIT = 5;
+  var COLLAPSED_LIMIT = 6;
   var SCROLL_EDGE = 48;
 
   var state = {
@@ -28,20 +28,18 @@
   }
 
   function formatNow(d) {
-    var week = ["日", "一", "二", "三", "四", "五", "六"][d.getDay()];
     return (
-      d.getFullYear() +
-      "-" +
-      pad2(d.getMonth() + 1) +
-      "-" +
-      pad2(d.getDate()) +
-      " 周" +
-      week +
-      " " +
       pad2(d.getHours()) +
       ":" +
-      pad2(d.getMinutes())
+      pad2(d.getMinutes()) +
+      ":" +
+      pad2(d.getSeconds())
     );
+  }
+
+  function formatToday(d) {
+    var week = ["日", "一", "二", "三", "四", "五", "六"][d.getDay()];
+    return pad2(d.getMonth() + 1) + "月" + pad2(d.getDate()) + "日 周" + week;
   }
 
   function stationName(id) {
@@ -295,7 +293,12 @@
     ensureCalendar(now);
     normalizeSelection();
 
-    document.getElementById("nowText").textContent = "现在 " + formatNow(now);
+    document.getElementById("todayText").innerHTML =
+      '<span class="today-date">' +
+      formatToday(now) +
+      '</span><span class="today-time">' +
+      formatNow(now) +
+      "</span>";
     var buildTime = window.APP_BUILD_TIME ? "（构建 " + window.APP_BUILD_TIME + "）" : "";
     document.getElementById("versionText").textContent = "版本 " + APP_VERSION + buildTime;
     syncDirectionUI();
@@ -488,7 +491,7 @@
     if (handleReloadScrollTop()) {
       finishReloadScrollTop();
     }
-    // 每秒重算等待分钟数，分钟一到就更新「还有 N 分钟」并剔除已过班次
+    // 每秒重算等待分钟数并刷新右上角时间（精确到秒）
     setInterval(render, 1000);
   }
 

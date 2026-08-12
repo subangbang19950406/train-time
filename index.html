@@ -11,16 +11,20 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="S3 时刻" />
-    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" href="icons/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png?v=2" />
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=2" />
+    <link rel="icon" type="image/png" sizes="180x180" href="icons/apple-touch-icon.png?v=2" />
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
     <main class="app">
       <header class="header">
-        <h1>S3 时刻</h1>
-        <p class="sub">按方向选择上车 / 下车点</p>
-        <p class="now" id="nowText"></p>
+        <div class="title-row">
+          <h1>S3 时刻表</h1>
+          <div class="title-meta">
+            <p class="today" id="todayText"></p>
+          </div>
+        </div>
         <div class="direction-row">
           <span class="direction-label">方向</span>
           <div class="direction-track" id="directionSeg" role="radiogroup" aria-label="方向">
