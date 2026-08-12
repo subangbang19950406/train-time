@@ -8,6 +8,11 @@
     />
     <meta name="color-scheme" content="light" />
     <title>S3 时刻</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="S3 时刻" />
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" href="icons/apple-touch-icon.png" />
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
@@ -33,7 +38,7 @@
 
       <section class="query-bar panel" aria-label="查询条件">
         <div class="query-field">
-          <span class="query-label">上</span>
+          <span class="query-label">上车点</span>
           <div class="origin-dropdown" id="boardDropdown">
             <button
               type="button"
@@ -50,7 +55,7 @@
           </div>
         </div>
         <div class="query-field">
-          <span class="query-label">下</span>
+          <span class="query-label">下车点</span>
           <div class="origin-dropdown" id="alightDropdown">
             <button
               type="button"
@@ -82,15 +87,44 @@
       </section>
 
       <section class="list" id="tripList" aria-live="polite"></section>
+      <button type="button" class="list-toggle" id="listToggle" hidden>
+        展开全部
+      </button>
       <div class="empty" id="emptyState" hidden>今日已无剩余班次</div>
 
       <footer class="footer">
         数据来自兰花塘站官方站牌，经站间时差推算（约）。
         往高家冲仅含经停兰花塘的车次（不含刘村短交路）。
         列车时刻表仅供参考，具体以实际运营为准。
-        <div class="version" id="versionText"></div>
+        <div class="footer-meta">
+          <div class="version" id="versionText"></div>
+          <button type="button" class="reload-btn" id="reloadBtn" aria-label="刷新页面">
+            刷新
+          </button>
+        </div>
       </footer>
     </main>
+
+    <div class="scroll-fab" id="scrollFab" hidden>
+      <button
+        type="button"
+        class="scroll-fab-btn"
+        id="scrollToTopBtn"
+        hidden
+        aria-label="到顶部"
+      >
+        <span class="scroll-fab-icon" aria-hidden="true">↑</span>
+      </button>
+      <button
+        type="button"
+        class="scroll-fab-btn"
+        id="scrollToBottomBtn"
+        hidden
+        aria-label="到底部"
+      >
+        <span class="scroll-fab-icon" aria-hidden="true">↓</span>
+      </button>
+    </div>
 
     <script src="js/data.js"></script>
     <script src="js/schedule.js"></script>
