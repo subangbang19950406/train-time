@@ -24,3 +24,11 @@ python3 -m http.server 8765
 ```bash
 node -e "const fs=require('fs'); const d=JSON.parse(fs.readFileSync('data/s3-lanhuatang.json')); fs.writeFileSync('js/data.js', 'window.S3_LANHUATANG = '+JSON.stringify(d,null,2)+';');"
 ```
+
+## 发布前更新版本号（commit 短哈希）
+
+```bash
+bash scripts/update-version.sh v1.0.3
+```
+
+会生成 `js/version.js`，页面底部显示如 `版本 v1.0.3+1a2b3c4`（并带构建时间）。

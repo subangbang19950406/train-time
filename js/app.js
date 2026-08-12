@@ -1,5 +1,6 @@
 (function () {
   var STORAGE_KEY = "s3-query-v2";
+  var APP_VERSION = window.APP_VERSION || "dev";
   var DEFAULTS = {
     direction: "gaojiachong",
     boardId: "youfangqiao",
@@ -178,6 +179,8 @@
     normalizeSelection();
 
     document.getElementById("nowText").textContent = "现在 " + formatNow(now);
+    var buildTime = window.APP_BUILD_TIME ? "（构建 " + window.APP_BUILD_TIME + "）" : "";
+    document.getElementById("versionText").textContent = "版本 " + APP_VERSION + buildTime;
     syncDirectionUI();
     syncCalendarUI();
     syncTriggers();
