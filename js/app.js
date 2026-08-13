@@ -288,6 +288,13 @@
     fab.hidden = topBtn.hidden && bottomBtn.hidden;
   }
 
+  function waitUrgency(waitMinutes) {
+    if (waitMinutes <= 1) return "urgent";
+    if (waitMinutes <= 4) return "soon";
+    if (waitMinutes <= 8) return "near";
+    return "calm";
+  }
+
   function render() {
     var now = new Date();
     ensureCalendar(now);
@@ -339,15 +346,18 @@
           : '<span class="wait-prefix">还有</span>' +
             t.waitMinutes +
             " 分钟";
+      var urgency = i === 0 ? waitUrgency(t.waitMinutes) : "";
       html +=
         '<article class="trip' +
-        (i === 0 ? " next" : "") +
+        (i === 0 ? " next urgency-" + urgency : "") +
         '">' +
         '<div class="dep">' +
         t.boardTime +
         '<span class="approx"> 到达</span>' +
         "</div>" +
-        '<div class="wait">' +
+        '<div class="wait' +
+        (urgency ? " wait-" + urgency : "") +
+        '">' +
         waitHtml +
         "</div>" +
         '<div class="arrive">到' +
